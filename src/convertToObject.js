@@ -9,12 +9,14 @@ function convertToObject(sourceString) {
   const styles = sourceString
     .split(';')
     .map((line) => line.trim())
-    .reduce((cssObject, line) => {
+    .reduce((result, line) => {
       const [property, value] = line.split(':').map((part) => part.trim());
 
-      cssObject[property] = value;
+      if (property && value) {
+        result[property] = value;
+      }
 
-      return cssObject;
+      return result;
     }, {});
 
   return styles;
